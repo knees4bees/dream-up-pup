@@ -1,0 +1,47 @@
+.create {
+  padding: 20px;
+}
+
+.create__title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.create__title--words {
+  margin-top: 100px;
+  padding-right: 10px;
+  font-size: 2rem;
+}
+
+.create__title--input {
+  display: inline;
+  margin-top: 100px;
+  font-size: 2rem;
+}
+
+.create__panel--container {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 30px;
+}
+
+.create__panel {
+  /* TODO revisit this height styling */
+  min-height: 100px;
+}
+
+.create__button--container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 50px;
+  align-content: center;
+  text-decoration: none;
+}
+
+.create__button--button {
+  background-color: white;
+  box-shadow: 3px 3px 10px black; 
+  padding: 10px;
+  font-size: 2rem;
+}

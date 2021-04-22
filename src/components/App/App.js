@@ -1,7 +1,9 @@
 import { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Landing from '../Landing/Landing';
 import Header from '../Header/Header';
+import Create from '../Create/Create';
 import { getBreeds } from '../../apiCalls';
 import { cleanBreeds } from '../../utilities';
 import { mockBreeds } from '../../mockData';
@@ -11,6 +13,7 @@ class App extends Component {
     super();
     this.state = {
       allBreeds: [],
+      selectedBreed: '',
     };
   }
 
@@ -29,12 +32,17 @@ class App extends Component {
   }
 
   render() {
+    const { allBreeds, selectedBreed } = this.state;
+
     return (
       <>
         <Header />
-        <Landing breeds={this.state.allBreeds} />
+        <Switch>
+          <Route exact path="/" render={() => <Landing breeds={allBreeds} />} />
+          <Route path="/create" render={() => <Create breed={selectedBreed} />} />
+        </Switch>
       </>
-    )
+    );
   }
 }
 
