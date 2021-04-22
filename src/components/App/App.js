@@ -4,6 +4,7 @@ import Landing from '../Landing/Landing';
 import Header from '../Header/Header';
 import { getBreeds } from '../../apiCalls';
 import { cleanBreeds } from '../../utilities';
+import { mockBreeds } from '../../mockData';
 
 class App extends Component {
   constructor() {
@@ -21,7 +22,9 @@ class App extends Component {
         }
         return response.json();
       })
-      .then(data => cleanBreeds(data))
+      .then(data => cleanBreeds(mockBreeds))
+      // TODO replace mockBreeds with actual fetched data
+      // .then(data => cleanBreeds(data))
       .then(cleanedData => this.setState({ allBreeds: cleanedData }))
   }
 
