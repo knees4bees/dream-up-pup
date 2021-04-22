@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <>
         <Header />
-        <Landing />
+        <Landing breeds={this.state.allBreeds} />
       </>
     )
   }
