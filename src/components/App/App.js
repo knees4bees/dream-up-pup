@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import './App.css';
+import Landing from '../Landing/Landing';
+import Header from '../Header/Header';
 
 class App extends Component {
   constructor() {
@@ -8,7 +10,12 @@ class App extends Component {
   }
 
   render() {
-    return <h1>hi</h1>;
+    return (
+      <>
+        <Header />
+        <Landing />
+      </>
+    )
   }
 }
 
