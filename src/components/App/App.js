@@ -39,7 +39,9 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" render={() => <Landing breeds={allBreeds} />} />
-          <Route path="/create" render={() => <Create breed={selectedBreed} />} />
+          {/* TODO replace hard-coded breed with actual selected breed */}
+          <Route path="/create" render={() => <Create breed='Afghan Hound' />} />
+          {/* <Route path="/create" render={() => <Create breed={selectedBreed} />} /> */}
         </Switch>
       </>
     );

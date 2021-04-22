@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Create.css';
+import { getBreedImages, getSubbreedImages } from '../../apiCalls';
 
 class Create extends Component {
   constructor(props) {
@@ -8,6 +9,18 @@ class Create extends Component {
   }
 
   componentDidMount() {
+    const breedWords = this.props.breed.split(' ');
+    const breed = '';
+    const subbreed = '';
+
+    if (breedWords.length === 2) {
+      breed = breedWords[1].toLowerCase();
+      subbreed = breedWords[0].toLowerCase();
+      getSubbreedImages(breed, subbreed);
+    } else {
+      breed = breedWords[0].toLowerCase();
+      getBreedImages(breed);
+    }
     //fetch images
   }
 
