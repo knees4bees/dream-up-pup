@@ -38,7 +38,6 @@
   flex-direction: column;
   align-content: baseline;
   justify-content: space-between;
-  height: 300px;
   width: 250px;
   border-radius: 3px;
   background-color: gray;
@@ -46,6 +45,13 @@
 
 .create__panel--input {
   margin-top: 20px;
+  /* height: 50px; */
+  font-size: 1.5rem;
+}
+
+.create__panel--input::placeholder {
+  font-size: 1.5rem;
+  padding: 10px;
 }
 
 .create__panel--image {

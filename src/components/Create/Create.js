@@ -58,12 +58,16 @@ class Create extends Component {
 
     if (images.length) {
       panels = images.map((image, index) => (
-        <div className="create__panel" key={index}>
+        <div className="create__panel">
           <img className="create__panel--image" src={image} alt="" />
-          <input
+          <textarea
             className="create__panel--input" 
             type="text"
             name="caption"
+            placeholder={`Sentence ${index + 1}`}
+            rows="5"
+            cols="40"
+            maxLength="85"
             value={sentences[index]}
             onChange={event => this.handleCaptionChange(event, index)}
           />
