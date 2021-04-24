@@ -1,7 +1,23 @@
 
 .create__panel {
-  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-content: baseline;
+  justify-content: space-between;
+  /* justify-content: center; */
+  height: 300px;
   width: 250px;
   border-radius: 3px;
   background-color: gray;
+}
+
+.create__panel--input {
+  margin-top: 20px;
+}
+
+.create__panel--image {
+  /* width: auto; */
+  margin: auto;
+  /* height: 100%; */
+  width: 100%;
 }

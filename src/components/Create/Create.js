@@ -5,16 +5,17 @@ import { getBreedImages, getSubbreedImages } from '../../apiCalls';
 import Panel from '../Panel/Panel';
 
 class Create extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [],
+    }
+  }
 
   componentDidMount = () => {
     const breedWords = this.props.breed.split(' ');
     let breed = '';
     let subbreed = '';
-
-    console.log('component Create mounted');
 
     if (breedWords.length === 2) {
       breed = breedWords[1].toLowerCase();
@@ -26,7 +27,7 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.props.updateCurrentImages(images.message));
+        .then(images => this.setState({ images: images.message }));
     } else {
       breed = breedWords[0].toLowerCase();
       getBreedImages(breed)
@@ -36,17 +37,12 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.props.updateCurrentImages(images.message));
+        .then(images => this.setState({ images: images.message }));
     }
-    console.log('breed: ', breed, 'subbreed:', subbreed)
   }
 
   createPanels = () => {
-    // TODO rethink and maybe refactor this images and panels stuff
-    let images = [];
-    if (this.props.images) {
-      images = [...this.props.images];
-    }
+    const { images } = this.state;
     let panels = [];
 
     if (images.length) {
@@ -63,7 +59,6 @@ class Create extends Component {
       }
     }
 
-    console.log("panels: ", panels);
     return panels;
   }
 
