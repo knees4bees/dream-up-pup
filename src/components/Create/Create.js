@@ -8,6 +8,7 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: '',
       images: [],
     }
   }
@@ -41,6 +42,10 @@ class Create extends Component {
     }
   }
 
+  handleChange = event => {
+    this.setState({ title: event.target.value });
+  }
+
   createPanels = () => {
     const { images } = this.state;
     let panels = [];
@@ -67,8 +72,13 @@ class Create extends Component {
       <main className="create">
         <div className="create__title">
           <h2 className="create__title--words">Title: </h2>
-          <input className="create__title--input">
-            {/* TODO refine input element */}
+          <input
+            className="create__title--input"
+            type="text"
+            name="title"
+            value={this.state.title}
+            onChange={event => this.handleChange(event)}
+          >
           </input>
         </div>
         <div className="create__panel--container">
