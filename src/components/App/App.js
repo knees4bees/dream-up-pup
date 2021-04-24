@@ -14,10 +14,15 @@ class App extends Component {
     this.state = {
       allBreeds: [],
       selectedBreed: '',
+      currentImages: [],
     };
   }
 
-  componentDidMount() {
+  updateCurrentImages = (images) => {
+    this.setState({ currentImages: [...images]});
+  }
+
+  componentDidMount = () => {
     getBreeds()
       .then(response => {
         if (!response.ok) {
@@ -40,7 +45,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Landing breeds={allBreeds} />} />
           {/* TODO replace hard-coded breed with actual selected breed */}
-          <Route path="/create" render={() => <Create breed='Afghan Hound' />} />
+          <Route path="/create" render={() => <Create breed='Afghan Hound' updateCurrentImages={this.updateCurrentImages} />} />
           {/* <Route path="/create" render={() => <Create breed={selectedBreed} />} /> */}
         </Switch>
       </>

@@ -8,20 +8,34 @@ class Create extends Component {
     super(props);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const breedWords = this.props.breed.split(' ');
-    const breed = '';
-    const subbreed = '';
+    let breed = '';
+    let subbreed = '';
 
     if (breedWords.length === 2) {
       breed = breedWords[1].toLowerCase();
       subbreed = breedWords[0].toLowerCase();
-      getSubbreedImages(breed, subbreed);
+      getSubbreedImages(breed, subbreed)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error();
+          }
+          return response.json();
+        })
+        .then(images => this.props.updateCurrentImages(images.message));
     } else {
       breed = breedWords[0].toLowerCase();
-      getBreedImages(breed);
+      getBreedImages(breed)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error();
+          }
+          return response.json();
+        })
+        .then(images => this.props.updateCurrentImages(images.message));
     }
-    //fetch images
+    console.log('breed: ', breed, 'subbreed:', subbreed)
   }
 
   render() {
