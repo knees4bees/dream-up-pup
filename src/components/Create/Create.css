@@ -26,9 +26,11 @@
   margin: 10px 30px;
 }
 
-.create__panel {
-  /* TODO revisit this height styling */
-  min-height: 100px;
+.create__panel--placeholder {
+  height: 200px;
+  width: 250px;
+  border-radius: 3px;
+  background-color: gray;
 }
 
 .create__button--container {

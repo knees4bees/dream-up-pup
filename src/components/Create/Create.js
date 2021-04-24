@@ -2,16 +2,19 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Create.css';
 import { getBreedImages, getSubbreedImages } from '../../apiCalls';
+import Panel from '../Panel/Panel';
 
 class Create extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount = () => {
     const breedWords = this.props.breed.split(' ');
     let breed = '';
     let subbreed = '';
+
+    console.log('component Create mounted');
 
     if (breedWords.length === 2) {
       breed = breedWords[1].toLowerCase();
@@ -38,6 +41,32 @@ class Create extends Component {
     console.log('breed: ', breed, 'subbreed:', subbreed)
   }
 
+  createPanels = () => {
+    // TODO rethink and maybe refactor this images and panels stuff
+    let images = [];
+    if (this.props.images) {
+      images = [...this.props.images];
+    }
+    let panels = [];
+
+    if (images.length) {
+      panels = images.map((image) => (
+        <Panel
+          image={image}
+          // TODO figure this part out
+          // text={text}
+        />
+      ));
+    } else {
+      for (let i = 0; i < 3; i++) {
+        panels.push(<div className="create__panel--container" key={i}><div className="create__panel--placeholder" /></div>);
+      }
+    }
+
+    console.log("panels: ", panels);
+    return panels;
+  }
+
   render() {
     return (
       <main className="create">
@@ -48,18 +77,7 @@ class Create extends Component {
           </input>
         </div>
         <div className="create__panel--container">
-          <div className="create__panel">
-            <img className="create__panel--image" src="" alt="" />
-            <input className="create__panel--input" />
-          </div>
-          <div className="create__panel">
-            <img className="create__panel--image" src="" alt="" />
-            <input className="create__panel--input" />
-          </div>
-          <div className="create__panel">
-            <img className="create__panel--image" src="" alt="" />
-            <input className="create__panel--input" />
-          </div>
+          {this.createPanels()}
         </div>
         <Link to="/story" className="create__button--container">
           <button className="create__button--button">Create story</button>

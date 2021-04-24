@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   updateCurrentImages = (images) => {
-    this.setState({ currentImages: [...images]});
+    this.setState({ currentImages: [...images] });
   }
 
   componentDidMount = () => {
@@ -45,7 +45,19 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Landing breeds={allBreeds} />} />
           {/* TODO replace hard-coded breed with actual selected breed */}
-          <Route path="/create" render={() => <Create breed='Afghan Hound' updateCurrentImages={this.updateCurrentImages} />} />
+          <Route 
+            path="/create"
+            render={() => {
+                {console.log("images in state: ", this.state.images)}
+              return (
+                <Create
+                  breed='Afghan Hound'
+                  updateCurrentImages={this.updateCurrentImages}
+                  images={this.state.images}
+                />
+              )
+            }}
+          />
           {/* <Route path="/create" render={() => <Create breed={selectedBreed} />} /> */}
         </Switch>
       </>
