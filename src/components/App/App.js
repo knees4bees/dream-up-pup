@@ -13,7 +13,7 @@ class App extends Component {
     super();
     this.state = {
       allBreeds: [],
-      selectedBreed: '',
+      selectedBreed: 'Affenpinscher',
     };
   }
 
@@ -25,10 +25,13 @@ class App extends Component {
         }
         return response.json();
       })
-      .then(data => cleanBreeds(mockBreeds))
-      // TODO replace mockBreeds with actual fetched data
-      // .then(data => cleanBreeds(data))
+      // .then(data => cleanBreeds(mockBreeds))
+      .then(data => cleanBreeds(data))
       .then(cleanedData => this.setState({ allBreeds: cleanedData }))
+  }
+
+  selectBreed = (breed) => {
+    this.setState({ selectedBreed: breed });
   }
 
   render() {
@@ -38,13 +41,8 @@ class App extends Component {
       <>
         <Header />
         <Switch>
-          <Route exact path="/" render={() => <Landing breeds={allBreeds} />} />
-          {/* TODO replace hard-coded breed with actual selected breed */}
-          <Route 
-            path="/create"
-            render={() => <Create breed='Afghan Hound' />}
-          />
-          {/* <Route path="/create" render={() => <Create breed={selectedBreed} />} /> */}
+          <Route exact path="/" render={() => <Landing breeds={allBreeds} selectedBreed={this.state.selectedBreed} selectBreed={this.selectBreed}/>} />
+          <Route path="/create" render={() => <Create breed={selectedBreed} />} />
         </Switch>
       </>
     );
