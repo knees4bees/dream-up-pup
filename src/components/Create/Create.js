@@ -2,7 +2,6 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Create.css';
 import { getBreedImages, getSubbreedImages } from '../../apiCalls';
-import Panel from '../Panel/Panel';
 
 class Create extends Component {
   constructor(props) {
@@ -10,6 +9,7 @@ class Create extends Component {
     this.state = {
       title: '',
       images: [],
+      sentences: [],
     }
   }
 
@@ -42,21 +42,32 @@ class Create extends Component {
     }
   }
 
-  handleChange = event => {
+  handleTitleChange = event => {
     this.setState({ title: event.target.value });
   }
 
+  handleCaptionChange = (event, index) => {
+    const newSentences = this.state.sentences;
+    newSentences[index] = event.target.value;
+    this.setState({ sentences: newSentences });
+  }
+
   createPanels = () => {
-    const { images } = this.state;
+    const { images, sentences } = this.state;
     let panels = [];
 
     if (images.length) {
-      panels = images.map((image) => (
-        <Panel
-          image={image}
-          // TODO figure this part out
-          // text={text}
-        />
+      panels = images.map((image, index) => (
+        <div className="create__panel" key={index}>
+          <img className="create__panel--image" src={image} alt="" />
+          <input
+            className="create__panel--input" 
+            type="text"
+            name="caption"
+            value={sentences[index]}
+            onChange={event => this.handleCaptionChange(event, index)}
+          />
+        </div>
       ));
     } else {
       for (let i = 0; i < 3; i++) {
@@ -77,7 +88,7 @@ class Create extends Component {
             type="text"
             name="title"
             value={this.state.title}
-            onChange={event => this.handleChange(event)}
+            onChange={event => this.handleTitleChange(event)}
           >
           </input>
         </div>

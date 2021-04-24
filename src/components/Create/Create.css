@@ -33,6 +33,26 @@
   background-color: gray;
 }
 
+.create__panel {
+  display: flex;
+  flex-direction: column;
+  align-content: baseline;
+  justify-content: space-between;
+  height: 300px;
+  width: 250px;
+  border-radius: 3px;
+  background-color: gray;
+}
+
+.create__panel--input {
+  margin-top: 20px;
+}
+
+.create__panel--image {
+  margin: auto;
+  width: 100%;
+}
+
 .create__button--container {
   display: flex;
   justify-content: flex-end;
