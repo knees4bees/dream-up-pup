@@ -1,7 +1,9 @@
 import { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Landing from '../Landing/Landing';
 import Header from '../Header/Header';
+import Create from '../Create/Create';
 import { getBreeds } from '../../apiCalls';
 import { cleanBreeds } from '../../utilities';
 import { mockBreeds } from '../../mockData';
@@ -11,10 +13,11 @@ class App extends Component {
     super();
     this.state = {
       allBreeds: [],
+      selectedBreed: 'Affenpinscher',
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     getBreeds()
       .then(response => {
         if (!response.ok) {
@@ -22,21 +25,28 @@ class App extends Component {
         }
         return response.json();
       })
-      .then(data => cleanBreeds(mockBreeds))
-      // TODO replace mockBreeds with actual fetched data
-      // .then(data => cleanBreeds(data))
+      // .then(data => cleanBreeds(mockBreeds))
+      .then(data => cleanBreeds(data))
       .then(cleanedData => this.setState({ allBreeds: cleanedData }))
   }
 
+  selectBreed = (breed) => {
+    this.setState({ selectedBreed: breed });
+  }
+
   render() {
+    const { allBreeds, selectedBreed } = this.state;
+
     return (
       <>
         <Header />
-        <Landing breeds={this.state.allBreeds} />
+        <Switch>
+          <Route exact path="/" render={() => <Landing breeds={allBreeds} selectedBreed={this.state.selectedBreed} selectBreed={this.selectBreed}/>} />
+          <Route path="/create" render={() => <Create breed={selectedBreed} />} />
+        </Switch>
       </>
-    )
+    );
   }
 }
-
 
 export default App;
