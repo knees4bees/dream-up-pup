@@ -4,6 +4,7 @@ import './App.css';
 import Landing from '../Landing/Landing';
 import Header from '../Header/Header';
 import Create from '../Create/Create';
+import Story from '../Story/Story';
 import { getBreeds } from '../../apiCalls';
 import { cleanBreeds } from '../../utilities';
 
@@ -58,7 +59,7 @@ class App extends Component {
   }
 
   render() {
-    const { allBreeds, selectedBreed, images, sentences } = this.state;
+    const { allBreeds, selectedBreed, title, images, sentences } = this.state;
 
     return (
       <>
@@ -87,6 +88,22 @@ class App extends Component {
                   updateImages={this.updateImages}
                   sentences={sentences}
                   updateSentences={this.updateSentences}
+                />
+              )
+            }}
+          />
+          <Route
+            path="/story"
+            render={() => {
+              return (
+                <Story
+                  // breed={selectedBreed}
+                  // updateTitle={this.updateTitle}
+                  title={title}
+                  images={images}
+                  // updateImages={this.updateImages}
+                  sentences={sentences}
+                  // updateSentences={this.updateSentences}
                 />
               )
             }}
