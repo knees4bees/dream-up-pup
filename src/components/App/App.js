@@ -14,6 +14,9 @@ class App extends Component {
     this.state = {
       allBreeds: [],
       selectedBreed: 'Affenpinscher',
+      title: '',
+      // images: [],
+      // sentences: [],
     };
   }
 
@@ -34,6 +37,10 @@ class App extends Component {
     this.setState({ selectedBreed: breed });
   }
 
+  updateTitle = event => {
+    this.setState({ title: event.target.value });
+  }
+
   render() {
     const { allBreeds, selectedBreed } = this.state;
 
@@ -41,8 +48,29 @@ class App extends Component {
       <>
         <Header />
         <Switch>
-          <Route exact path="/" render={() => <Landing breeds={allBreeds} selectedBreed={this.state.selectedBreed} selectBreed={this.selectBreed}/>} />
-          <Route path="/create" render={() => <Create breed={selectedBreed} />} />
+          <Route
+            exact path="/"
+            render={() => {
+              return (
+                <Landing
+                  breeds={allBreeds}
+                  selectedBreed={this.state.selectedBreed}
+                  selectBreed={this.selectBreed}
+                />
+              )
+            }}
+          />
+          <Route
+            path="/create"
+            render={() => {
+              return (
+                <Create
+                  breed={selectedBreed}
+                  updateTitle={this.updateTitle}
+                />
+              )
+            }}
+          />
         </Switch>
       </>
     );

@@ -7,7 +7,7 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
+      // title: '',
       images: [],
       sentences: [],
     }
@@ -42,9 +42,9 @@ class Create extends Component {
     }
   }
 
-  handleTitleChange = event => {
-    this.setState({ title: event.target.value });
-  }
+  // handleTitleChange = event => {
+  //   this.setState({ title: event.target.value });
+  // }
 
   handleCaptionChange = (event, index) => {
     const newSentences = this.state.sentences;
@@ -58,7 +58,7 @@ class Create extends Component {
 
     if (images.length) {
       panels = images.map((image, index) => (
-        <div className="create__panel">
+        <div className="create__panel" key={index}>
           <img className="create__panel--image" src={image} alt="" />
           <textarea
             className="create__panel--input" 
@@ -92,7 +92,7 @@ class Create extends Component {
             type="text"
             name="title"
             value={this.state.title}
-            onChange={event => this.handleTitleChange(event)}
+            onChange={event => this.props.updateTitle(event)}
           >
           </input>
         </div>
