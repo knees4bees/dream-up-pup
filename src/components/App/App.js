@@ -16,7 +16,7 @@ class App extends Component {
       selectedBreed: 'Affenpinscher',
       title: '',
       images: [],
-      // sentences: [],
+      sentences: [],
     };
   }
 
@@ -45,8 +45,14 @@ class App extends Component {
     this.setState({ images: images });
   }
 
+  updateSentences = (event, index) => {
+    const newSentences = this.state.sentences;
+    newSentences[index] = event.target.value;
+    this.setState({ sentences: newSentences });
+  }
+
   render() {
-    const { allBreeds, selectedBreed, images } = this.state;
+    const { allBreeds, selectedBreed, images, sentences } = this.state;
 
     return (
       <>
@@ -73,6 +79,8 @@ class App extends Component {
                   updateTitle={this.updateTitle}
                   images={images}
                   updateImages={this.updateImages}
+                  sentences={sentences}
+                  updateSentences={this.updateSentences}
                 />
               )
             }}

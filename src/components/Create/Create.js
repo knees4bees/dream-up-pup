@@ -9,7 +9,7 @@ class Create extends Component {
     this.state = {
       // title: '',
       // images: [],
-      sentences: [],
+      // sentences: [],
     }
   }
 
@@ -46,16 +46,16 @@ class Create extends Component {
   //   this.setState({ title: event.target.value });
   // }
 
-  handleCaptionChange = (event, index) => {
-    const newSentences = this.state.sentences;
-    newSentences[index] = event.target.value;
-    this.setState({ sentences: newSentences });
-  }
+  // handleCaptionChange = (event, index) => {
+  //   const newSentences = this.state.sentences;
+  //   newSentences[index] = event.target.value;
+  //   this.setState({ sentences: newSentences });
+  // }
 
   createPanels = () => {
     // const { images, sentences } = this.state;
     const images = this.props.images;
-    const sentences = this.state.sentences;
+    const sentences = this.props.sentences;
     let panels = [];
 
     if (images.length) {
@@ -71,7 +71,7 @@ class Create extends Component {
             cols="40"
             maxLength="85"
             value={sentences[index]}
-            onChange={event => this.handleCaptionChange(event, index)}
+            onChange={event => this.props.updateSentences(event, index)}
           />
         </div>
       ));
@@ -93,7 +93,7 @@ class Create extends Component {
             className="create__title--input"
             type="text"
             name="title"
-            value={this.state.title}
+            value={this.props.title}
             onChange={event => this.props.updateTitle(event)}
           >
           </input>
