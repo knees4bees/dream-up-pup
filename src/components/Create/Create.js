@@ -4,14 +4,6 @@ import './Create.css';
 import { getBreedImages, getSubbreedImages } from '../../apiCalls';
 
 class Create extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // title: '',
-      // images: [],
-      // sentences: [],
-    }
-  }
 
   componentDidMount = () => {
     const breedWords = this.props.breed.split(' ');
@@ -42,18 +34,7 @@ class Create extends Component {
     }
   }
 
-  // handleTitleChange = event => {
-  //   this.setState({ title: event.target.value });
-  // }
-
-  // handleCaptionChange = (event, index) => {
-  //   const newSentences = this.state.sentences;
-  //   newSentences[index] = event.target.value;
-  //   this.setState({ sentences: newSentences });
-  // }
-
   createPanels = () => {
-    // const { images, sentences } = this.state;
     const images = this.props.images;
     const sentences = this.props.sentences;
     let panels = [];

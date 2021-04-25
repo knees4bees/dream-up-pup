@@ -6,7 +6,6 @@ import Header from '../Header/Header';
 import Create from '../Create/Create';
 import { getBreeds } from '../../apiCalls';
 import { cleanBreeds } from '../../utilities';
-import { mockBreeds } from '../../mockData';
 
 class App extends Component {
   constructor() {
@@ -28,9 +27,16 @@ class App extends Component {
         }
         return response.json();
       })
-      // .then(data => cleanBreeds(mockBreeds))
       .then(data => cleanBreeds(data))
       .then(cleanedData => this.setState({ allBreeds: cleanedData }))
+  }
+
+  resetHome = () => {
+    this.setState({
+      title: '',
+      images: [],
+      sentences: [],
+    });
   }
 
   selectBreed = (breed) => {
@@ -56,7 +62,7 @@ class App extends Component {
 
     return (
       <>
-        <Header />
+        <Header resetHome={this.resetHome}/>
         <Switch>
           <Route
             exact path="/"

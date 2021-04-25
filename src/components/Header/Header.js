@@ -1,11 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ resetHome }) => {
   return (
     <nav className="nav-bar">
-      {/* <NavLink exact to="/" className="nav-bar__home" onClick={resetHome} activeStyle={{ visibility: 'hidden' }}> */}
-      <NavLink exact to="/" className="nav-bar__home">
+      <NavLink exact to="/" className="nav-bar__home" onClick={resetHome}>
         <img className="nav-bar__home--img" src="/doghouse.svg" alt="doghouse" />
       </NavLink>
       <h1 className="nav-bar__title">Dream Up Pup</h1>
