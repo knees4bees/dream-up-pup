@@ -15,7 +15,7 @@ class App extends Component {
       allBreeds: [],
       selectedBreed: 'Affenpinscher',
       title: '',
-      // images: [],
+      images: [],
       // sentences: [],
     };
   }
@@ -41,8 +41,12 @@ class App extends Component {
     this.setState({ title: event.target.value });
   }
 
+  updateImages = (images) => {
+    this.setState({ images: images });
+  }
+
   render() {
-    const { allBreeds, selectedBreed } = this.state;
+    const { allBreeds, selectedBreed, images } = this.state;
 
     return (
       <>
@@ -54,7 +58,7 @@ class App extends Component {
               return (
                 <Landing
                   breeds={allBreeds}
-                  selectedBreed={this.state.selectedBreed}
+                  selectedBreed={selectedBreed}
                   selectBreed={this.selectBreed}
                 />
               )
@@ -67,6 +71,8 @@ class App extends Component {
                 <Create
                   breed={selectedBreed}
                   updateTitle={this.updateTitle}
+                  images={images}
+                  updateImages={this.updateImages}
                 />
               )
             }}

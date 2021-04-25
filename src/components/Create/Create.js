@@ -8,7 +8,7 @@ class Create extends Component {
     super(props);
     this.state = {
       // title: '',
-      images: [],
+      // images: [],
       sentences: [],
     }
   }
@@ -28,7 +28,7 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.setState({ images: images.message }));
+        .then(images => this.props.updateImages(images.message));
     } else {
       breed = breedWords[0].toLowerCase();
       getBreedImages(breed)
@@ -38,7 +38,7 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.setState({ images: images.message }));
+        .then(images => this.props.updateImages(images.message));
     }
   }
 
@@ -53,7 +53,9 @@ class Create extends Component {
   }
 
   createPanels = () => {
-    const { images, sentences } = this.state;
+    // const { images, sentences } = this.state;
+    const images = this.props.images;
+    const sentences = this.state.sentences;
     let panels = [];
 
     if (images.length) {
