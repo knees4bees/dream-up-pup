@@ -98,6 +98,11 @@ describe('Dream Up Pup -- create page', () => {
     cy.get('button').click()
       .location('pathname').should('eq', '/story')
   });
+
+  it('Should take user to main page when home button is clicked', () => {
+    cy.get('.nav-bar__home').click()
+      .location('pathname').should('eq', '/')
+  });
 });
 
 describe('Dream Up Pup -- view story page', () => {
@@ -134,4 +139,104 @@ describe('Dream Up Pup -- view story page', () => {
     cy.get('button')
       .contains('Save story')
   });
+
+  it('Should take user to main page when home button is clicked', () => {
+    cy.get('.nav-bar__home').click()
+      .location('pathname').should('eq', '/')
+  });
 });
+
+describe('Dream Up Pup -- entire user flow', () => {
+  it('Should see a navigation bar', () => {
+    cy.visit('http://localhost:3000')
+      .get('.nav-bar')
+      .contains('Dream Up Pup')
+      .get('.nav-bar__home--img').should('have.attr', 'alt', 'doghouse')
+      .get('.nav-bar__shelf--img').should('have.attr', 'alt', 'three books on a shelf')
+  });
+
+  it('Should select a breed and change mind', () => {
+    cy.get('select')
+      .select('Beagle')
+      .select('Labrador')
+  });
+
+  it('Should be taken to next page to write story', () => {
+    cy.get('button')
+      .contains('Write story')
+      .click()
+  });
+
+  it('Should be able to go back home', () => {
+    cy.get('.nav-bar__home').click()
+      .location('pathname').should('eq', '/')
+  });
+
+  it('Should select a breed again', () => {
+    cy.get('select')
+      .select('Labrador')
+  });
+
+  it('Should be taken to next page to write story', () => {
+    cy.get('button')
+      .contains('Write story')
+      .click()
+  });
+
+  it('Should enter a title', () => {
+    cy.get('.create__title--input').type('My doggie day')
+      .should('have.value', 'My doggie day')
+  });
+
+  it('Should accept user input in input boxes', () => {
+    cy.get('[placeholder="Sentence 1"]')
+      .type('This morning I went outside to sniff things.')
+      .should('have.value', 'This morning I went outside to sniff things.')
+      .get('[placeholder="Sentence 2"]')
+      .type('Then in the afternoon I had a snack. And also sniffed more things.')
+      .should('have.value', 'Then in the afternoon I had a snack. And also sniffed more things.')
+      .get('[placeholder="Sentence 3"]')
+      .type('And then I ate some garbage for dessert!')
+      .should('have.value', 'And then I ate some garbage for dessert!')
+  });
+
+  it('Should take user to next page to view story', () => {
+    cy.get('button').click()
+      .location('pathname').should('eq', '/story')
+  });
+
+  it('Should show three images', () => {
+    cy.get('.story__panel')
+      .find('.story__panel--image')
+      .should('have.length', 3)
+  });
+
+  it('Should show three captions', () => {
+    cy.get('.story__panel')
+      .find('.story__panel--text')
+      .should('have.length', 3)
+  });
+
+  it('Should show the user\'s captions', () => {
+    cy.get('.story__panel--text').eq(0)
+      .contains('went outside to sniff things')
+    cy.get('.story__panel--text').eq(1)
+      .contains('Then in the afternoon')
+    cy.get('.story__panel--text').eq(2)
+      .contains('ate some garbage')
+  });
+
+  it.skip('Should save the story', () => {
+    cy.get('button')
+      .contains('Save story')
+      .click()
+  });
+
+  it.skip('Should display the saved story on the shelf', () => {
+    cy.get('.nav-bar__shelf').click()
+      .location('pathname').should('eq', '/shelf')
+      // .contains
+  });
+
+});
+
