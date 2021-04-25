@@ -99,3 +99,39 @@ describe('Dream Up Pup -- create page', () => {
       .location('pathname').should('eq', '/story')
   });
 });
+
+describe('Dream Up Pup -- view story page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/story')
+  });
+
+  it('Should see a navigation bar', () => {
+    cy.get('.nav-bar')
+      .contains('Dream Up Pup')
+      .get('.nav-bar__home--img').should('have.attr', 'alt', 'doghouse')
+      .get('.nav-bar__shelf--img').should('have.attr', 'alt', 'three books on a shelf')
+  });
+
+  it('Should have story container', () => {
+    cy.get('.story__panel--container')
+      .find('.story__panel')
+      .should('have.length', 3)
+  });
+
+  it('Should show three images', () => {
+    cy.get('.story__panel')
+      .find('.story__panel--image')
+      .should('have.length', 3)
+  });
+
+  it('Should show three captions', () => {
+    cy.get('.story__panel')
+      .find('.story__panel--text')
+      .should('have.length', 3)
+  });
+
+  it.skip('Should have a button to save the story', () => {
+    cy.get('button')
+      .contains('Save story')
+  });
+});
