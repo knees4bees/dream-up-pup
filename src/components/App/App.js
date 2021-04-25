@@ -4,9 +4,9 @@ import './App.css';
 import Landing from '../Landing/Landing';
 import Header from '../Header/Header';
 import Create from '../Create/Create';
+import Story from '../Story/Story';
 import { getBreeds } from '../../apiCalls';
 import { cleanBreeds } from '../../utilities';
-import { mockBreeds } from '../../mockData';
 
 class App extends Component {
   constructor() {
@@ -14,6 +14,9 @@ class App extends Component {
     this.state = {
       allBreeds: [],
       selectedBreed: 'Affenpinscher',
+      title: '',
+      images: [],
+      sentences: [],
     };
   }
 
@@ -25,24 +28,86 @@ class App extends Component {
         }
         return response.json();
       })
-      // .then(data => cleanBreeds(mockBreeds))
       .then(data => cleanBreeds(data))
       .then(cleanedData => this.setState({ allBreeds: cleanedData }))
+  }
+
+  resetHome = () => {
+    this.setState({
+      title: '',
+      images: [],
+      sentences: [],
+    });
   }
 
   selectBreed = (breed) => {
     this.setState({ selectedBreed: breed });
   }
 
+  updateTitle = event => {
+    this.setState({ title: event.target.value });
+  }
+
+  updateImages = (images) => {
+    this.setState({ images: images });
+  }
+
+  updateSentences = (event, index) => {
+    const newSentences = this.state.sentences;
+    newSentences[index] = event.target.value;
+    this.setState({ sentences: newSentences });
+  }
+
   render() {
-    const { allBreeds, selectedBreed } = this.state;
+    const { allBreeds, selectedBreed, title, images, sentences } = this.state;
 
     return (
       <>
-        <Header />
+        <Header resetHome={this.resetHome}/>
         <Switch>
-          <Route exact path="/" render={() => <Landing breeds={allBreeds} selectedBreed={this.state.selectedBreed} selectBreed={this.selectBreed}/>} />
-          <Route path="/create" render={() => <Create breed={selectedBreed} />} />
+          <Route
+            exact path="/"
+            render={() => {
+              return (
+                <Landing
+                  breeds={allBreeds}
+                  selectedBreed={selectedBreed}
+                  selectBreed={this.selectBreed}
+                />
+              )
+            }}
+          />
+          <Route
+            path="/create"
+            render={() => {
+              return (
+                <Create
+                  breed={selectedBreed}
+                  updateTitle={this.updateTitle}
+                  images={images}
+                  updateImages={this.updateImages}
+                  sentences={sentences}
+                  updateSentences={this.updateSentences}
+                />
+              )
+            }}
+          />
+          <Route
+            path="/story"
+            render={() => {
+              return (
+                <Story
+                  // breed={selectedBreed}
+                  // updateTitle={this.updateTitle}
+                  title={title}
+                  images={images}
+                  // updateImages={this.updateImages}
+                  sentences={sentences}
+                  // updateSentences={this.updateSentences}
+                />
+              )
+            }}
+          />
         </Switch>
       </>
     );

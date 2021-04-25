@@ -4,14 +4,6 @@ import './Create.css';
 import { getBreedImages, getSubbreedImages } from '../../apiCalls';
 
 class Create extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      images: [],
-      sentences: [],
-    }
-  }
 
   componentDidMount = () => {
     const breedWords = this.props.breed.split(' ');
@@ -28,7 +20,7 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.setState({ images: images.message }));
+        .then(images => this.props.updateImages(images.message));
     } else {
       breed = breedWords[0].toLowerCase();
       getBreedImages(breed)
@@ -38,27 +30,18 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.setState({ images: images.message }));
+        .then(images => this.props.updateImages(images.message));
     }
   }
 
-  handleTitleChange = event => {
-    this.setState({ title: event.target.value });
-  }
-
-  handleCaptionChange = (event, index) => {
-    const newSentences = this.state.sentences;
-    newSentences[index] = event.target.value;
-    this.setState({ sentences: newSentences });
-  }
-
   createPanels = () => {
-    const { images, sentences } = this.state;
+    const images = this.props.images;
+    const sentences = this.props.sentences;
     let panels = [];
 
     if (images.length) {
       panels = images.map((image, index) => (
-        <div className="create__panel">
+        <div className="create__panel" key={index}>
           <img className="create__panel--image" src={image} alt="" />
           <textarea
             className="create__panel--input" 
@@ -69,7 +52,7 @@ class Create extends Component {
             cols="40"
             maxLength="85"
             value={sentences[index]}
-            onChange={event => this.handleCaptionChange(event, index)}
+            onChange={event => this.props.updateSentences(event, index)}
           />
         </div>
       ));
@@ -91,8 +74,8 @@ class Create extends Component {
             className="create__title--input"
             type="text"
             name="title"
-            value={this.state.title}
-            onChange={event => this.handleTitleChange(event)}
+            value={this.props.title}
+            onChange={event => this.props.updateTitle(event)}
           >
           </input>
         </div>
