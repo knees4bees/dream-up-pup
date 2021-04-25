@@ -237,6 +237,52 @@ describe('Dream Up Pup -- entire user flow', () => {
       .location('pathname').should('eq', '/shelf')
       // .contains
   });
+});
 
+describe.skip('Dream Up Pup -- error handling', () => {
+  it('Should display an error message when visiting a nonexistent URL', () => {
+      cy.visit('http://localhost:3000/foo')
+      .get('.error__message')
+      .contains('Something went wrong')
+  });
+
+  it('Should display a specific error message when fetch yields a 404 status', () => {
+    cy.intercept('https://dog.ceo/api/breeds/list/all', {
+      statusCode: 404,
+    })
+      .visit('http://localhost:3000/')
+      .get('.error__message')
+      .contains('Page not found')
+  });
+
+  it('Should display a specific error message when fetch yields a 500 status', () => {
+    cy.intercept('https://dog.ceo/api/breeds/list/all', {
+      statusCode: 500,
+    })
+      .visit('http://localhost:3000/')
+      .get('.error__message')
+      .contains('Please try again later')
+  });
+
+  it('Should display an error message when there is a network error', () => {
+    cy.intercept('https://dog.ceo/api/breeds/list/all', {
+      forceNetworkError: true
+    })
+      .visit('http://localhost:3000/')
+      .get('.error__message')
+      .contains('Something went wrong')
+  });
+
+  it('Should display error message if network down and clicked on "Write story" button', () => {
+    cy.intercept('https://dog.ceo/api/breed/', {
+      forceNetworkError: true
+    })
+      .visit('http://localhost:3000/')
+      .get('button')
+      .contains('Write story')
+      .click()
+      .get('.error__message')
+      .contains('Something went wrong')
+  });
 });
 
