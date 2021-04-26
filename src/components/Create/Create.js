@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Create.css';
 import { getBreedImages, getSubbreedImages } from '../../apiCalls';
 
@@ -20,7 +21,8 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.props.updateImages(images.message));
+        .then(images => this.props.updateImages(images.message))
+        .catch(err => this.props.updateError('Ruh roh! Something went wrong!'))
     } else {
       breed = breedWords[0].toLowerCase();
       getBreedImages(breed)
@@ -30,7 +32,8 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.props.updateImages(images.message));
+        .then(images => this.props.updateImages(images.message))
+        .catch(err => this.props.updateError('Ruh roh! Something went wrong!'))
     }
   }
 
@@ -68,6 +71,9 @@ class Create extends Component {
   render() {
     return (
       <main className="create">
+        {!this.props.images.length &&
+          <h2 className="error-message">Fetching...</h2>
+        }
         <div className="create__title">
           <h2 className="create__title--words">Title: </h2>
           <input
@@ -91,3 +97,13 @@ class Create extends Component {
 }
 
 export default Create;
+
+Create.propTypes = {
+  breed: PropTypes.string.isRequired,
+  updateTitle: PropTypes.func.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string),
+  updateImages: PropTypes.func.isRequired,
+  sentences: PropTypes.arrayOf(PropTypes.string),
+  updateSentences: PropTypes.func,
+  updateError: PropTypes.func
+};

@@ -43,7 +43,7 @@ describe('Dream Up Pup -- landing page', () => {
 describe('Dream Up Pup -- create page', () => {
   beforeEach(() => {
     cy.fixture('mockImages').then(( data ) => {
-      cy.intercept('https://dog.ceo/api/breed/', {
+      cy.intercept('https://dog.ceo/api/breed/affenpinscher/images/random/3', {
       statusCode: 200,
       body:  data
       })
@@ -239,29 +239,34 @@ describe('Dream Up Pup -- entire user flow', () => {
   });
 });
 
-describe.skip('Dream Up Pup -- error handling', () => {
-  it('Should display an error message when visiting a nonexistent URL', () => {
+describe('Dream Up Pup -- error handling', () => {
+  it('Should display an initial message and then an error message when visiting a nonexistent URL', () => {
       cy.visit('http://localhost:3000/foo')
-      .get('.error__message')
-      .contains('Something went wrong')
+      .get('.error-message')
+      .contains('Fetching...')
+      .wait(800)
+      .get('.error-message')
+      .contains('Ruh roh! That page doesn\'t exist.')
   });
 
-  it('Should display a specific error message when fetch yields a 404 status', () => {
+  it('Should display an error message when fetch yields a 404 status', () => {
     cy.intercept('https://dog.ceo/api/breeds/list/all', {
       statusCode: 404,
     })
       .visit('http://localhost:3000/')
-      .get('.error__message')
-      .contains('Page not found')
+      .wait(100)
+      .get('.error-message')
+      .contains('Ruh roh! Something went wrong!')
   });
 
-  it('Should display a specific error message when fetch yields a 500 status', () => {
+  it('Should display an error message when fetch yields a 500 status', () => {
     cy.intercept('https://dog.ceo/api/breeds/list/all', {
       statusCode: 500,
     })
       .visit('http://localhost:3000/')
-      .get('.error__message')
-      .contains('Please try again later')
+      .wait(100)
+      .get('.error-message')
+      .contains('Ruh roh! Something went wrong!')
   });
 
   it('Should display an error message when there is a network error', () => {
@@ -269,20 +274,22 @@ describe.skip('Dream Up Pup -- error handling', () => {
       forceNetworkError: true
     })
       .visit('http://localhost:3000/')
-      .get('.error__message')
-      .contains('Something went wrong')
+      .wait(800)
+      .get('.error-message')
+      .contains('Ruh roh! Something went wrong!')
   });
 
-  it('Should display error message if network down and clicked on "Write story" button', () => {
-    cy.intercept('https://dog.ceo/api/breed/', {
+  it('Should display error message if network goes down between initial fetch and click on "Write story" button', () => {
+    cy.intercept('https://dog.ceo/api/breed/affenpinscher/images/random/3', {
       forceNetworkError: true
     })
       .visit('http://localhost:3000/')
       .get('button')
       .contains('Write story')
       .click()
-      .get('.error__message')
-      .contains('Something went wrong')
+      .wait(800)
+      .get('.error-message')
+      .contains('Ruh roh! Something went wrong!')
   });
 });
 
