@@ -21,7 +21,8 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.props.updateImages(images.message));
+        .then(images => this.props.updateImages(images.message))
+        .catch(err => this.props.updateError('Ruh roh! Something went wrong!'))
     } else {
       breed = breedWords[0].toLowerCase();
       getBreedImages(breed)
@@ -31,7 +32,8 @@ class Create extends Component {
           }
           return response.json();
         })
-        .then(images => this.props.updateImages(images.message));
+        .then(images => this.props.updateImages(images.message))
+        .catch(err => this.props.updateError('Ruh roh! Something went wrong!'))
     }
   }
 
@@ -69,6 +71,9 @@ class Create extends Component {
   render() {
     return (
       <main className="create">
+        {!this.props.images.length &&
+          <h2 className="error-message">Fetching...</h2>
+        }
         <div className="create__title">
           <h2 className="create__title--words">Title: </h2>
           <input
@@ -99,5 +104,6 @@ Create.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string),
   updateImages: PropTypes.func.isRequired,
   sentences: PropTypes.arrayOf(PropTypes.string),
-  updateSentences: PropTypes.func
+  updateSentences: PropTypes.func,
+  updateError: PropTypes.func
 };

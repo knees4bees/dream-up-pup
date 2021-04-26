@@ -17,6 +17,7 @@ class App extends Component {
       title: '',
       images: [],
       sentences: [],
+      error: ''
     };
   }
 
@@ -30,6 +31,7 @@ class App extends Component {
       })
       .then(data => cleanBreeds(data))
       .then(cleanedData => this.setState({ allBreeds: cleanedData }))
+      .catch(err => this.setState({ error: 'Ruh roh! Something went wrong!'}))
   }
 
   resetHome = () => {
@@ -37,6 +39,7 @@ class App extends Component {
       title: '',
       images: [],
       sentences: [],
+      error: ''
     });
   }
 
@@ -58,57 +61,73 @@ class App extends Component {
     this.setState({ sentences: newSentences });
   }
 
+  updateError = (message) => {
+    this.setState({ error: message });
+  }
+
   render() {
-    const { allBreeds, selectedBreed, title, images, sentences } = this.state;
+    const { allBreeds, selectedBreed, title, images, sentences, error } = this.state;
 
     return (
       <>
         <Header resetHome={this.resetHome}/>
-        <Switch>
-          <Route
-            exact path="/"
-            render={() => {
-              return (
-                <Landing
-                  breeds={allBreeds}
-                  selectedBreed={selectedBreed}
-                  selectBreed={this.selectBreed}
-                />
-              )
-            }}
-          />
-          <Route
-            path="/create"
-            render={() => {
-              return (
-                <Create
-                  breed={selectedBreed}
-                  updateTitle={this.updateTitle}
-                  images={images}
-                  updateImages={this.updateImages}
-                  sentences={sentences}
-                  updateSentences={this.updateSentences}
-                />
-              )
-            }}
-          />
-          <Route
-            path="/story"
-            render={() => {
-              return (
-                <Story
-                  // breed={selectedBreed}
-                  // updateTitle={this.updateTitle}
-                  title={title}
-                  images={images}
-                  // updateImages={this.updateImages}
-                  sentences={sentences}
-                  // updateSentences={this.updateSentences}
-                />
-              )
-            }}
-          />
-        </Switch>
+        {error && 
+          <h2 className="error-message">{error}</h2>
+        }
+        {!error && !allBreeds.length &&
+          <h2 className="error-message">Fetching...</h2>
+        }
+        {!error && allBreeds.length &&
+          <Switch>
+            <Route
+              exact path="/"
+              render={() => {
+                return (
+                  <Landing
+                    breeds={allBreeds}
+                    selectedBreed={selectedBreed}
+                    selectBreed={this.selectBreed}
+                  />
+                )
+              }}
+            />
+            <Route
+              path="/create"
+              render={() => {
+                return (
+                  <Create
+                    breed={selectedBreed}
+                    updateTitle={this.updateTitle}
+                    images={images}
+                    updateImages={this.updateImages}
+                    sentences={sentences}
+                    updateSentences={this.updateSentences}
+                    updateError={this.updateError}
+                  />
+                )
+              }}
+            />
+            <Route
+              path="/story"
+              render={() => {
+                return (
+                  <Story
+                    title={title}
+                    images={images}
+                    sentences={sentences}
+                  />
+                )
+              }}
+            />
+            <Route
+              render={() => {
+                return (
+                  <h2 className="error-message">Ruh roh! That page doesn't exist.</h2>
+                )
+              }}
+            />
+          </Switch>
+        }
       </>
     );
   }
