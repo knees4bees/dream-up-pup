@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Create.css';
 import { getBreedImages, getSubbreedImages } from '../../apiCalls';
 
@@ -91,3 +92,12 @@ class Create extends Component {
 }
 
 export default Create;
+
+Create.propTypes = {
+  breed: PropTypes.string.isRequired,
+  updateTitle: PropTypes.func.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string),
+  updateImages: PropTypes.func.isRequired,
+  sentences: PropTypes.arrayOf(PropTypes.string),
+  updateSentences: PropTypes.func
+};

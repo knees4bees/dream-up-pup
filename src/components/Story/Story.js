@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './Story.css';
 
 const Story = ({ title, images, sentences }) => {
@@ -28,3 +29,9 @@ const Story = ({ title, images, sentences }) => {
 }
 
 export default Story;
+
+Story.propTypes = {
+  title: PropTypes.string,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sentences: PropTypes.arrayOf(PropTypes.string)
+};

@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Header.css';
 
 const Header = ({ resetHome }) => {
@@ -14,3 +15,7 @@ const Header = ({ resetHome }) => {
 }
 
 export default Header;
+
+Header.propTypes = {
+  resetHome: PropTypes.func.isRequired
+};

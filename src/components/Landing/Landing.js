@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Landing.css';
 
 const Landing = ({ breeds, selectedBreed, selectBreed }) => {
@@ -32,3 +33,9 @@ const Landing = ({ breeds, selectedBreed, selectBreed }) => {
 }
 
 export default Landing;
+
+Landing.propTypes = {
+  breeds: PropTypes.arrayOf(PropTypes.string),
+  selectedBreed: PropTypes.string.isRequired,
+  selectBreed: PropTypes.func.isRequired,
+};
