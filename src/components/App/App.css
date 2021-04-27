@@ -1,3 +1,23 @@
+/* **Color Palette** */
+/* Dark gray: #030328 */
+/* Dark blue: #4C69F6 */
+/* Medium blue: #4C94F6 */
+/* Light yellow: #F5F356 */
+/* Dark yellow: #FFC510 */
+/* Red: #EE5454 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #030328;
+  color: #fff;
+  font-family: 'Comic Neue', cursive;
+}
+
 .error-message {
   font-size: 2rem;
   text-align: center;
