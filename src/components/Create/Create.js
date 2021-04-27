@@ -75,15 +75,18 @@ class Create extends Component {
           <h2 className="error-message">Fetching...</h2>
         }
         <div className="create__title">
-          <h2 className="create__title--words">Title: </h2>
-          <input
-            className="create__title--input"
-            type="text"
-            name="title"
-            value={this.props.title}
-            onChange={event => this.props.updateTitle(event)}
-          >
-          </input>
+          <h2 className="create__title--words">
+            Title: 
+            <input
+              className="create__title--input"
+              type="text"
+              name="title"
+              placeholder="My doggie day"
+              maxLength="30"
+              value={this.props.title}
+              onChange={event => this.props.updateTitle(event)}
+            />
+          </h2>
         </div>
         <div className="create__panel--container">
           {this.createPanels()}
