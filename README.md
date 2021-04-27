@@ -104,6 +104,7 @@ Increase fluency with:
 
 ## Contributors
 * [Katie B](https://github.com/knees4bees) - Application Creator
+* Doghouse and pawprint icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>. Dog-above-book icon created using dog icon from <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and book icon from <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 
 ## Contact
 [<img src="https://img.shields.io/badge/LinkedIn-Katie--B-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0077b5"/>][linkedin]
