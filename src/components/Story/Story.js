@@ -8,7 +8,6 @@ const Story = ({ title, images, sentences }) => {
         <h2 className="story__title--words">{title}</h2>
       </div>
       <div className="story__panel--container">
-        {/* {this.createPanels()} */}
         <div className="story__panel">
           <img className="story__panel--image" src={images[0]} alt="" />
           <p className="story__panel--text">{sentences[0]}</p>

@@ -33,8 +33,9 @@
 }
 
 .nav-bar__shelf--img {
-  display: inline;
   width: 60px;
+  /* TODO reinstate visibility when this feature is added */
+  visibility: hidden;
 }
 
 .horizontal-rule {
