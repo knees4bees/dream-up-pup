@@ -103,7 +103,7 @@ Increase fluency with:
 - ![CSS3](https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white)
 - ![Webpack](https://img.shields.io/badge/webpack%20-%238DD6F9.svg?&style=for-the-badge&logo=webpack&logoColor=black)
 - ![Cypress](https://img.shields.io/badge/cypress%20-%2317202C.svg?&style=for-the-badge&logo=cypress&logoColor=white)
-- [![Travis CI](https://img.shields.io/travis/73VW/TechnicalReport.svg?style=for-the-badge&label=Travis+CI)
+- ![Travis CI](https://img.shields.io/travis/73VW/TechnicalReport.svg?style=for-the-badge&label=Travis+CI)
 
 ## Contributors
 * [Katie B](https://github.com/knees4bees) - Application Creator
