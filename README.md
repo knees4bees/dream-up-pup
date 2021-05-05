@@ -1,6 +1,8 @@
 <h1 align="left">Dream Up Pup 🐾</h1>
 
-<p align="center">
+[![Build Status](https://travis-ci.com/knees4bees/dream-up-pup.svg?branch=main)](https://travis-ci.com/knees4bees/dream-up-pup)
+
+<p>
    <a href="https://dream-up-pup.herokuapp.com"><strong>Explore the app »</strong></a>
 </p>
 
@@ -65,7 +67,7 @@ When a user clicks on a the "Create story" button, they are shown a panel with a
 
 #### Responsive Design
  - The app is fully responsive across all screen sizes. Viewed on an iPhone 6/7/8:
- - 
+
 ![image](https://user-images.githubusercontent.com/72777671/116175894-6604da80-a6ce-11eb-8f98-faeaee35ffb6.png)
 ![image](https://user-images.githubusercontent.com/72777671/116176939-33f47800-a6d0-11eb-94a5-8a22c8bdbc44.png)
 
@@ -101,6 +103,7 @@ Increase fluency with:
 - ![CSS3](https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white)
 - ![Webpack](https://img.shields.io/badge/webpack%20-%238DD6F9.svg?&style=for-the-badge&logo=webpack&logoColor=black)
 - ![Cypress](https://img.shields.io/badge/cypress%20-%2317202C.svg?&style=for-the-badge&logo=cypress&logoColor=white)
+- [![Travis CI](https://img.shields.io/travis/73VW/TechnicalReport.svg?style=for-the-badge&label=Travis+CI)
 
 ## Contributors
 * [Katie B](https://github.com/knees4bees) - Application Creator
