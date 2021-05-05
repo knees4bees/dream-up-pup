@@ -1,8 +1,13 @@
 language: node_js
 node_js:
-  - node
+- node
 notifications:
   email: false
 script:
-  - npm test
-  - npm run build
+- npm test
+- npm run build
+deploy:
+  provider: heroku
+  api_key:
+    secure: CmmnZfX4wM2cBFj7DNqio+wzU6DRmhX5I6uV3JuhtGusdLaUWEmYu//JkOESlsBYr2L3HslEDyTp+uY5VnII1m1nfFSFWKQ9C9DBz2gu9JXrZJwjGEvLzthHTISxVRXIlYqVuZgcSzrr5i8MZ4xkuDAPWAlWgWt609CrTvhf80QOXubFSykDpYv2NFQ+YqSaM9fec6N2NlyT3FvSNqc+8J0eHaB2XBt+fJn7mkW8Sd3k7bWgfdDZs7gPiCfeid6dHKKFOEoHB3705ZUDhFDTmjxv311sTuVPcoU6n+fL+B4LgGQ0k7XTK1c4z8jRz4SObHY4RkJnWZPJH2cMb8UulUuhQxK8izOSursXDabGTGPnlLYg7flZZ3Z9+JnaUp+iFvdJjELTVC58esIVCXxOex/yTKWg4v/ho3QDtOz8gckrxGp9VO4S3VuvrNXmOVqVJtWsOvtaU7bthfgWm5cQdln7jHNZ27kDfHDXVYTT74tNYxXU7LMk83Q08wS8OnvGpeLnLKwUcQJbwVrme8+Hbh5Mds9l8h9F6yS9sA/rG58nQPfiGwaS1DT5kW2kea1CyzYvBf36idfs5igqi/ZalOibs2z5oHobojYeyrleHL4HR1jMxRj4urFbYtdpv4Nibc0uKcxX+625tAi0FTbfmLbLEozbk3Vk3+MtJXyG4Lw=
+  app: dream-up-pup
